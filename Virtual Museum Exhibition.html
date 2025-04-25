@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Museum Exhibition</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4.0.0/dist/photo-sphere-viewer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4.0.0/dist/photo-sphere-viewer.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px 0;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .art-piece {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .art-piece:hover {
+            transform: scale(1.03);
+        }
+
+        .art-piece img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .art-description {
+            padding: 15px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Virtual Museum Exhibition</h1>
+        <p>Explore Art & History from Anywhere</p>
+    </header>
+
+    <div class="container">
+        <section class="intro">
+            <h2>Welcome to the Virtual Experience</h2>
+            <p>Step inside a world of art, history, and culture without leaving your home.</p>
+        </section>
+
+        <section class="gallery">
+            <div class="art-piece" onclick="openModal('The Starry Night', 'By Vincent van Gogh - A stunning night sky with swirling stars.')">
+                <img src="C:\Users\admin\Downloads\download.jpg" alt="Artwork 1">
+                <div class="art-description">
+                    <h3>The Starry Night</h3>
+                    <p>By Vincent van Gogh - A stunning night sky with swirling stars.</p>
+                </div>
+            </div>
+
+            <div class="art-piece" onclick="openModal('Mona Lisa', 'By Leonardo da Vinci - One of the most famous portraits in the world.')">
+                <img src="C:\Users\admin\Downloads\mm.jpg" alt="Artwork 2">
+                <div class="art-description">
+                    <h3>Mona Lisa</h3>
+                    <p>By Leonardo da Vinci - One of the most famous portraits in the world.</p>
+                </div>
+            </div>
+
+            <div class="art-piece" onclick="openModal('The Persistence of Memory', 'By Salvador Dalí - A surreal scene featuring melting clocks.')">
+                <img src="C:\Users\admin\Downloads\download (1).jpg" alt="Artwork 3">
+                <div class="art-description">
+                    <h3>The Persistence of Memory</h3>
+                    <p>By Salvador Dalí - A surreal scene featuring melting clocks.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="panorama">
+            <h2>360° Virtual Tour</h2>
+            <div id="panorama" style="width: 100%; height: 400px;"></div>
+        </section>
+    </div>
+
+    <div id="artModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Virtual Museum Exhibition. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function openModal(title, description) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('artModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('artModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('artModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        window.onload = function () {
+            const viewer = new PhotoSphereViewer.Viewer({
+                panorama: 'Downloads\kk.jpg', // The relative path to your 360° image
+                container: document.querySelector('#panorama'),
+                navbar: true,
+            });
+        };
+    </script>
+</body>
+</html>
